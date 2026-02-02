@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bhls0pvxijp2d"]
+
+[ext_resource type="Texture2D" uid="uid://64c5c421paf1" path="res://icon.svg" id="1_vgoqa"]
+[ext_resource type="PackedScene" uid="uid://bdg5vxg4wyr4c" path="res://Objects/player.tscn" id="2_dppwf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dppwf"]
+size = Vector2(605, 126)
+
+[node name="gym" type="Node2D" unique_id=1652932676]
+
+[node name="Node2D" type="StaticBody2D" parent="." unique_id=664559550]
+position = Vector2(595, 537)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D" unique_id=1211650987]
+position = Vector2(-5.5, 0)
+shape = SubResource("RectangleShape2D_dppwf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=504279715]
+position = Vector2(1, -1)
+scale = Vector2(4.9609375, 1)
+texture = ExtResource("1_vgoqa")
+
+[node name="Player" parent="." unique_id=677010997 instance=ExtResource("2_dppwf")]

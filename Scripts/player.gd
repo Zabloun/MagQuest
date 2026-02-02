@@ -1,21 +1,21 @@
 extends CharacterBody2D
 
-@export var SPEED : int
-var direction
+@export var speed : int = 300
+@export var gravity : int = 300
+@export var jump_strength : int = 100
+
+var direction = 0
 
 func _physics_process(delta: float) -> void:
-	direction = Input.get_vector("left", "right", "up", "down").normalized()
-	velocity = direction * SPEED
-	animationManager()
+	velocity.x = direction * speed
+	apply_gravity(delta)
+	input_handling()
 	move_and_slide()
-	
 
-func animationManager():
-	if direction == Vector2.ZERO:
-		$AnimatedSprite2D.play("idle")
-	elif direction.x > 0:
-		$AnimatedSprite2D.play("run")
-		$AnimatedSprite2D.flip_h = false
-	elif direction.x < 0:
-		$AnimatedSprite2D.play("run")
-		$AnimatedSprite2D.flip_h = true
+func apply_gravity(delta):
+	velocity.y += gravity * delta
+
+func input_handling():
+	direction = Input.get_axis("left", "right")
+	if Input.is_action_just_pressed("jump") and is_on_floor() == true:
+		velocity.y = -jump_strength
