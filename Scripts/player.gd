@@ -9,6 +9,13 @@ extends CharacterBody2D
 var direction = 0
 var is_attacking = false
 
+# Attack vector
+var attack_direction = Vector2(1, 0)
+
+# MAGIC NUMBERS SHALL NOT PASS - Enums relate directly to array bellow
+enum {RIGHT, LEFT, UP, DOWN}
+var attack_directions = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, -1), Vector2(0, 1)]
+
 # Access to child nodes of Player
 @onready var animationPlayer : AnimatedSprite2D = $AnimatedSprite2D
 
@@ -24,7 +31,7 @@ func _physics_process(delta: float) -> void:
 func apply_gravity(delta):
 	velocity.y += gravity * delta
 
-# Handling edge cases related to player movement
+# Determines players velocity and attack direction
 func input_handling():
 	direction = Input.get_axis("left", "right")
 	if Input.is_action_just_pressed("jump") and is_on_floor() == true:
@@ -34,11 +41,15 @@ func input_handling():
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true
 	if Input.is_action_just_pressed("up"):
-		print("up")
+		attack_direction = attack_directions[UP]
 	if Input.is_action_just_pressed("down"):
-		print("down")
+		attack_direction = attack_directions[DOWN]
+	if Input.is_action_just_pressed("left"):
+		attack_direction = attack_directions[LEFT]
+	if Input.is_action_just_pressed("right"):
+		attack_direction = attack_directions[RIGHT]
 
-# Handling edge cases related to player animation
+# Determines which animations should play and when
 func animation_manager():
 	# First checking players currently facing direction to determine whether to flip sprite
 	if direction > 0:
