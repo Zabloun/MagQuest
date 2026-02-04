@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bhls0pvxijp2d"]
 
+[ext_resource type="Script" uid="uid://byuifqjktrpbj" path="res://Scripts/gym.gd" id="1_v68ns"]
 [ext_resource type="Texture2D" uid="uid://64c5c421paf1" path="res://icon.svg" id="1_vgoqa"]
 [ext_resource type="PackedScene" uid="uid://bdg5vxg4wyr4c" path="res://Objects/player.tscn" id="2_dppwf"]
 
@@ -7,6 +8,7 @@
 size = Vector2(605, 126)
 
 [node name="gym" type="Node2D" unique_id=1652932676]
+script = ExtResource("1_v68ns")
 
 [node name="Node2D" type="StaticBody2D" parent="." unique_id=664559550]
 position = Vector2(595, 537)
@@ -22,3 +24,5 @@ texture = ExtResource("1_vgoqa")
 
 [node name="Player" parent="." unique_id=677010997 instance=ExtResource("2_dppwf")]
 position = Vector2(586, 228)
+
+[connection signal="on_death" from="Player" to="." method="_on_player_on_death"]
