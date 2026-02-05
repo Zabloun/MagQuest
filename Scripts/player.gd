@@ -77,10 +77,11 @@ func animation_manager():
 			await animationPlayer.animation_finished
 			is_attacking = false
 	elif is_dead == true:
-		animationPlayer.play("death")
-		await animationPlayer.animation_finished
-		death()
+		if animationPlayer.animation != "death":
+			animationPlayer.play("death")
+			await animationPlayer.animation_finished
+			death()
 
 func death():
-	is_dead = true;
+	is_dead = true
 	on_death.emit()
