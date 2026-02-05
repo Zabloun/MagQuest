@@ -24,7 +24,10 @@ signal on_death
 
 # Main function where all operations are called
 func _physics_process(delta: float) -> void:
-	velocity.x = direction * speed
+	if is_dead == false:
+		velocity.x = direction * speed
+	else:
+		velocity.x = 0
 	apply_gravity(delta)
 	input_handling()
 	animation_manager()
