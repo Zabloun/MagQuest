@@ -9,6 +9,7 @@ extends CharacterBody2D
 var direction = 0
 var is_attacking = false
 var is_dead = false
+var jump_total : float = 10
 # Attack vector
 var attack_direction = Vector2(1, 0)
 

@@ -246,3 +246,9 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657847599]
 position = Vector2(0, 16.5)
 shape = SubResource("CapsuleShape2D_3y5cq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1590519810]
+process_callback = 0
+limit_bottom = 641
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
