@@ -3,7 +3,9 @@ extends CharacterBody2D
 # Physics variables for player movement (editable in the editor)
 @export var speed : int = 300
 @export var gravity : int = 600
-@export var jump_strength : int = 300
+@export var fall_gravity : int = 900
+@export var low_jump_gravity : int = 1200
+@export var jump_strength : int = 600
 
 # Additional Variables
 var direction = 0
@@ -36,7 +38,14 @@ func _physics_process(delta: float) -> void:
 
 # Applying phyics while keeping Main _physics_process clear
 func apply_gravity(delta):
-	velocity.y += gravity * delta
+	 # Always apply gravity
+	if velocity.y < 0: # going up
+		if Input.is_action_pressed("jump"):
+			velocity.y += gravity * delta
+		else:
+			velocity.y += low_jump_gravity * delta
+	else: # falling
+		velocity.y += fall_gravity * delta
 
 # Determines players velocity and attack direction
 func input_handling():
@@ -45,7 +54,6 @@ func input_handling():
 		if Input.is_action_just_pressed("jump") and is_on_floor() == true:
 			velocity.y = -jump_strength
 			animationPlayer.play("jump_initial")
-			await animationPlayer.animation_finished
 		if Input.is_action_just_pressed("attack"):
 			is_attacking = true
 		if Input.is_action_just_pressed("die(testing)"):
