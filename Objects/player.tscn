@@ -235,13 +235,13 @@ radius = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=677010997]
 scale = Vector2(2, 2)
+collision_layer = 8
 script = ExtResource("1_3y5cq")
+speed = 400
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=248436163]
 sprite_frames = SubResource("SpriteFrames_y0qk3")
-animation = &"death"
-frame = 4
-frame_progress = 1.0
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657847599]
 position = Vector2(0, 16.5)
@@ -252,3 +252,8 @@ process_callback = 0
 limit_bottom = 641
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="SpellCastDelay" type="Timer" parent="." unique_id=450554271]
+wait_time = 0.267
+
+[node name="SpellCoolDown" type="Timer" parent="." unique_id=727024457]

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c6tvm3pl7nixx"]
+
+[ext_resource type="Script" uid="uid://4f23r0vnpu4b" path="res://Objects/Testing Objects/Scripts/damage_tester.gd" id="1_0tauq"]
+[ext_resource type="Texture2D" uid="uid://64c5c421paf1" path="res://icon.svg" id="1_130s3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_130s3"]
+size = Vector2(120, 118)
+
+[node name="Damage Tester" type="StaticBody2D" unique_id=1513194151]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_0tauq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=576729073]
+texture = ExtResource("1_130s3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=161935709]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_130s3")

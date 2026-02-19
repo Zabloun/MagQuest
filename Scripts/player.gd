@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+#Prefabs
+var fire_ball_prefab = preload("res://Objects/fireball.tscn")
+
 # Physics variables for player movement (editable in the editor)
 @export var speed : int = 300
 @export var gravity : int = 600
@@ -24,6 +27,7 @@ var attack_directions = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, -1), Vector2(
 
 # Signals
 signal on_death
+signal cast(pos: Vector2, dir: Vector2)
 
 # Main function where all operations are called
 func _physics_process(delta: float) -> void:
@@ -56,6 +60,7 @@ func input_handling():
 			animationPlayer.play("jump_initial")
 		if Input.is_action_just_pressed("attack"):
 			is_attacking = true
+			attack()
 		if Input.is_action_just_pressed("die(testing)"):
 			is_dead = true
 		if Input.is_action_just_pressed("up"):
@@ -93,6 +98,13 @@ func animation_manager():
 			animationPlayer.play("death")
 			await animationPlayer.animation_finished
 			death()
+
+func attack():
+	if $SpellCoolDown.wait_time == 1:
+		$SpellCoolDown.start()
+		$SpellCastDelay.start()
+		await $SpellCastDelay.timeout
+		cast.emit(position, attack_direction)
 
 func death():
 	is_dead = true
